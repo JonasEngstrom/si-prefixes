@@ -281,4 +281,12 @@ mod tests {
         assert_eq!(Prefix::Robi.symbol(), "Ri");
         assert_eq!(Prefix::Quebi.symbol(), "Qi");
     }
+
+    #[test]
+    fn conversion_constant_correct() {
+        let decimeters = 5f64;
+        let centimeters = 50f64;
+        assert_eq!(decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::Centi), centimeters);
+        assert_eq!(centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::Deci), decimeters);
+    }
 }
