@@ -293,18 +293,21 @@ mod tests {
     }
 
     #[test]
-    fn conversion_constant_correct() {
+    fn conversion_constant_is_correct() {
         let meters = 0.5f64;
         let decimeters = 5f64;
         let centimeters = 50f64;
-        
+
+        assert_eq!(meters * Prefix::conversion_constant(Prefix::None, Prefix::None), meters);
         assert_eq!(meters * Prefix::conversion_constant(Prefix::None, Prefix::Deci), decimeters);
         assert_eq!(meters * Prefix::conversion_constant(Prefix::None, Prefix::Centi), centimeters);
 
         assert_eq!(decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::None), meters);
+        assert_eq!(decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::Deci), decimeters);
         assert_eq!(decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::Centi), centimeters);
 
         assert_eq!(centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::Deci), decimeters);
         assert_eq!(centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::None), meters);
+        assert_eq!(centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::Centi), centimeters);
     }
 }
