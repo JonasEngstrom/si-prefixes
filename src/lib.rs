@@ -1,42 +1,215 @@
+//! # SI Prefixes
+//! 
+//! SI Prefixes is a crate for converting between units using different SI prefixes. It is developed as a dependency to be used in other crates requiring unit conversion. The prefixes are based on [*The International System of Units*](https://doi.org/10.59161/AUEZ1291)<sup>1</sup>.
+//! 
+//! ## Included Prefixes
+//!
+//! Apart from strict SI system prefixes, that refer to powers of 10, the crate also includes prefixes referring to powers of 2. The included prefixes are listed in the tables below.
+//! 
+//! ### SI Prefixes (Referring to Powers of 10)
+//! 
+//! |Name|Symbol|Factor|
+//! |-|-|-|
+//! |deca|da|10<sup>1</sup>|
+//! |hecto|h|10<sup>2</sup>|
+//! |kilo|k|10<sup>3</sup>|
+//! |mega|M|10<sup>6</sup>|
+//! |giga|G|10<sup>9</sup>|
+//! |tera|T|10<sup>12</sup>|
+//! |peta|P|10<sup>15</sup>|
+//! |exa|E|10<sup>18</sup>|
+//! |zetta|Z|10<sup>21</sup>|
+//! |yotta|Y|10<sup>24</sup>|
+//! |ronna|R|10<sup>27</sup>|
+//! |quetta|Q|10<sup>30</sup>|
+//! |deci|d|10<sup>-1</sup>|
+//! |centi|c|10<sup>-2</sup>|
+//! |milli|m|10<sup>-3</sup>|
+//! |micro|µ|10<sup>-6</sup>|
+//! |nano|n|10<sup>-9</sup>|
+//! |pico|p|10<sup>-12</sup>|
+//! |femto|f|10<sup>-15</sup>|
+//! |atto|a|10<sup>-18</sup>|
+//! |zepto|z|10<sup>-21</sup>|
+//! |yocto|y|10<sup>-24</sup>|
+//! |ronto|r|10<sup>-27</sup>|
+//! |quecto|q|10<sup>-30</sup>|
+//! 
+//! ### Prefixes Referring to Powers of 2
+//! 
+//! |Name|Symbol|Factor|
+//! |-|-|-|
+//! |kibi|Ki|2<sup>10</sup>|
+//! |mebi|Mi|2<sup>20</sup>|
+//! |gibi|Gi|2<sup>30</sup>|
+//! |tebi|Ti|2<sup>40</sup>|
+//! |pebi|Pi|2<sup>50</sup>|
+//! |exbi|Ei|2<sup>60</sup>|
+//! |zebi|Zi|2<sup>70</sup>|
+//! |yobi|Yi|2<sup>80</sup>|
+//! |robi|Ri|2<sup>90</sup>|
+//! |quebi|Qi|2<sup>100</sup>|
+//! 
+//! ## Usage
+//! 
+//! The crate includes the factors, names, and symbols listed above for use in calculations and output formatting. It also includes a method to calculate conversion constants that can be multiplied with a value in order to change its prefix.
+//! 
+//! Usage revolves around the `Prefix` enum. For example the prefix kilo is represented as `Prefix::Kilo`.
+//! 
+//! Note that, even though *Bureau International des Poids et Mesures* uses lower-case letters for the entire prefixes, the enum variants used in the source code have initial capital letters, as to conform to [*The Rust Style Guide*](https://doc.rust-lang.org/style-guide/advice.html).
+//! 
+//! ### Getting a Prefix Name
+//! 
+//! ```
+//! use si_prefixes::Prefix;
+//! 
+//! let prefix_name = Prefix::Micro.name();
+//! 
+//! assert_eq!(prefix_name, "micro");
+//! ```
+//! 
+//! ### Getting a Prefix Symbol
+//! 
+//! ```
+//! use si_prefixes::Prefix;
+//! 
+//! let prefix_symbol = Prefix::Mega.symbol();
+//! 
+//! assert_eq!(prefix_symbol, "M");
+//! ```
+//! 
+//! ### Getting a Prefix Factor
+//! 
+//! ```
+//! use si_prefixes::Prefix;
+//! 
+//! let prefix_factor = Prefix::Kilo.factor();
+//! 
+//! assert_eq!(prefix_factor, 1_000f64);
+//! ```
+//!
+//! ### Getting a Prefix Conversion Constant
+//! 
+//! #### Converting from One Prefix to Another
+//! 
+//! ```
+//! use si_prefixes::Prefix;
+//! 
+//! let centimeters = 50f64;
+//! let decimeters = centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::Deci);
+//! 
+//! assert_eq!(decimeters, 5f64);
+//! ```
+//! 
+//! #### Adding a Prefix
+//! 
+//! ```
+//! use si_prefixes::Prefix;
+//! 
+//! let meters = 0.5f64;
+//! let decimeters = meters * Prefix::conversion_constant(Prefix::None, Prefix::Deci);
+//! 
+//! assert_eq!(decimeters, 5f64);
+//! ```
+//! 
+//! #### Removing a Prefix
+//! 
+//! ```
+//! use si_prefixes::Prefix;
+//! 
+//! let decimeters = 5f64;
+//! let meters = decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::None);
+//! 
+//! assert_eq!(meters, 0.5f64);
+//! ```
+//! 
+//! ## References
+//!
+//! 1. Bureau International des Poids et Mesures. (2025). *Le Système international d'unités/The International System of Units* [Brochure]. 9th edition. [https://doi.org/10.59161/AUEZ1291](https://doi.org/10.59161/AUEZ1291)
+
 pub enum Prefix {
+    /// Name: deca, symbol: da, factor: 10<sup>1</sup>
     Deca,
+    /// Name: hecto, symbol: h, factor: 10<sup>2</sup>
     Hecto,
+    /// Name: kilo, symbol: k, factor: 10<sup>3</sup>
     Kilo,
+    /// Name: mega, symbol: M, factor: 10<sup>6</sup>
     Mega,
+    /// Name: giga, symbol: G, factor: 10<sup>9</sup>
     Giga,
+    /// Name: tera, symbol: T, factor: 10<sup>12</sup>
     Tera,
+    /// Name: peta, symbol: P, factor: 10<sup>15</sup>
     Peta,
+    /// Name: exa, symbol: E, factor: 10<sup>18</sup>
     Exa,
+    /// Name: zetta, symbol: Z, factor: 10<sup>21</sup>
     Zetta,
+    /// Name: yotta, symbol: Y, factor: 10<sup>24</sup>
     Yotta,
+    /// Name: ronna, symbol: R, factor: 10<sup>27</sup>
     Ronna,
+    /// Name: quetta, symbol: Q, factor: 10<sup>30</sup>
     Quetta,
+    /// Name: deci, symbol: d, factor: 10<sup>-1</sup>
     Deci,
+    /// Name: centi, symbol: c, factor: 10<sup>-2</sup>
     Centi,
+    /// Name: milli, symbol: m, factor: 10<sup>-3</sup>
     Milli,
+    /// Name: micro, symbol: µ, factor: 10<sup>-6</sup>
     Micro,
+    /// Name: nano, symbol: n, factor: 10<sup>-9</sup>
     Nano,
+    /// Name: pico, symbol: p, factor: 10<sup>-12</sup>
     Pico,
+    /// Name: femto, symbol: f, factor: 10<sup>-15</sup>
     Femto,
+    /// Name: atto, symbol: a, factor: 10<sup>-18</sup>
     Atto,
+    /// Name: zepto, symbol: z, factor: 10<sup>-21</sup>
     Zepto,
+    /// Name: yocto, symbol: y, factor: 10<sup>-24</sup>
     Yocto,
+    /// Name: ronto, symbol: r, factor: 10<sup>-27</sup>
     Ronto,
+    /// Name: quecto, symbol: q, factor: 10<sup>-30</sup>
     Quecto,
+    /// Name: kibi, symbol: Ki, factor: 2<sup>10</sup>
     Kibi,
+    /// Name: mebi, symbol: Mi, factor: 2<sup>20</sup>
     Mebi,
+    /// Name: gibi, symbol: Gi, factor: 2<sup>30</sup>
     Gibi,
+    /// Name: tebi, symbol: Ti, factor: 2<sup>40</sup>
     Tebi,
+    /// Name: pebi, symbol: Pi, factor: 2<sup>50</sup>
     Pebi,
+    /// Name: exbi, symbol: Ei, factor: 2<sup>60</sup>
     Exbi,
+    /// Name: zebi, symbol: Zi, factor: 2<sup>70</sup>
     Zebi,
+    /// Name: yobi, symbol: Yi, factor: 2<sup>80</sup>
     Yobi,
+    /// Name: robi, symbol: Ri, factor: 2<sup>90</sup>
     Robi,
+    /// Name: quebi, symbol: Qi, factor: 2<sup>100</sup>
     Quebi,
+    /// Name: no name, symbol: no symbol, factor: 1
     None,
 }
 
 impl Prefix {
+    /// Returns the factor associated with a prefix.
+    /// 
+    /// ```
+    /// use si_prefixes::Prefix;
+    /// 
+    /// let unit_factor = Prefix::Milli.factor();
+    /// 
+    /// assert_eq!(unit_factor, 0.001f64);
+    /// ```
     pub fn factor(&self) -> f64 {
         match self {
             Prefix::Deca => 1e1f64,
@@ -77,6 +250,15 @@ impl Prefix {
         }
     }
 
+    /// Returns the name of a prefix.
+    /// 
+    /// ```
+    /// use si_prefixes::Prefix;
+    /// 
+    /// let unit_name = Prefix::Kilo.name();
+    /// 
+    /// assert_eq!(unit_name, "kilo");
+    /// ```
     pub fn name(&self) -> &'static str {
         match self {
             Prefix::Deca => "deca",
@@ -117,6 +299,15 @@ impl Prefix {
         }
     }
 
+    /// Returns the symbol of a prefix.
+    /// 
+    /// ```
+    /// use si_prefixes::Prefix;
+    /// 
+    /// let unit_symbol = Prefix::Kibi.symbol();
+    /// 
+    /// assert_eq!(unit_symbol, "Ki");
+    /// ```
     pub fn symbol(&self) -> &'static str {
         match self {
             Prefix::Deca => "da",
@@ -157,6 +348,39 @@ impl Prefix {
         }
     }
 
+    /// Calculates and returns a conversion constant that can be multiplied with a value to change its prefix.
+    /// ## Converting from One Prefix to Another
+    /// 
+    /// ```
+    /// use si_prefixes::Prefix;
+    /// 
+    /// let centimeters = 50f64;
+    /// let decimeters = centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::Deci);
+    /// 
+    /// assert_eq!(decimeters, 5f64);
+    /// ```
+    /// 
+    /// ## Adding a Prefix
+    /// 
+    /// ```
+    /// use si_prefixes::Prefix;
+    /// 
+    /// let meters = 0.5f64;
+    /// let decimeters = meters * Prefix::conversion_constant(Prefix::None, Prefix::Deci);
+    /// 
+    /// assert_eq!(decimeters, 5f64);
+    /// ```
+    /// 
+    /// ## Removing a Prefix
+    /// 
+    /// ```
+    /// use si_prefixes::Prefix;
+    /// 
+    /// let decimeters = 5f64;
+    /// let meters = decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::None);
+    /// 
+    /// assert_eq!(meters, 0.5f64);
+    /// ```
     pub fn conversion_constant(from: Self, to: Self) -> f64 {
         from.factor() / to.factor()
     }
