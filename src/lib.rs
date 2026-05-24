@@ -33,6 +33,7 @@ pub enum Prefix {
     Yobi,
     Robi,
     Quebi,
+    None,
 }
 
 impl Prefix {
@@ -72,6 +73,7 @@ impl Prefix {
             Prefix::Yobi => 80f64.exp2(),
             Prefix::Robi => 90f64.exp2(),
             Prefix::Quebi => 100f64.exp2(),
+            Prefix::None => 1f64,
         }
     }
 
@@ -111,6 +113,7 @@ impl Prefix {
             Prefix::Yobi => "yobi",
             Prefix::Robi => "robi",
             Prefix::Quebi => "quebi",
+            Prefix::None => "",
         }
     }
 
@@ -150,6 +153,7 @@ impl Prefix {
             Prefix::Yobi => "Yi",
             Prefix::Robi => "Ri",
             Prefix::Quebi => "Qi",
+            Prefix::None => "",
         }
     }
 
@@ -200,6 +204,8 @@ mod tests {
         assert_eq!(Prefix::Yobi.factor(), 1_208_925_819_614_629_174_706_176f64);
         assert_eq!(Prefix::Robi.factor(), 1_237_940_039_285_380_274_899_124_224f64);
         assert_eq!(Prefix::Quebi.factor(), 1_267_650_600_228_229_401_496_703_205_376f64);
+
+        assert_eq!(Prefix::None.factor(), 1f64);
     }
 
     #[test]
@@ -240,6 +246,8 @@ mod tests {
         assert_eq!(Prefix::Yobi.name(), "yobi");
         assert_eq!(Prefix::Robi.name(), "robi");
         assert_eq!(Prefix::Quebi.name(), "quebi");
+
+        assert_eq!(Prefix::None.name(), "");
     }
 
     #[test]
@@ -280,13 +288,23 @@ mod tests {
         assert_eq!(Prefix::Yobi.symbol(), "Yi");
         assert_eq!(Prefix::Robi.symbol(), "Ri");
         assert_eq!(Prefix::Quebi.symbol(), "Qi");
+        
+        assert_eq!(Prefix::None.symbol(), "")
     }
 
     #[test]
     fn conversion_constant_correct() {
+        let meters = 0.5f64;
         let decimeters = 5f64;
         let centimeters = 50f64;
+        
+        assert_eq!(meters * Prefix::conversion_constant(Prefix::None, Prefix::Deci), decimeters);
+        assert_eq!(meters * Prefix::conversion_constant(Prefix::None, Prefix::Centi), centimeters);
+
+        assert_eq!(decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::None), meters);
         assert_eq!(decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::Centi), centimeters);
+
         assert_eq!(centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::Deci), decimeters);
+        assert_eq!(centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::None), meters);
     }
 }
