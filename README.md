@@ -127,4 +127,4 @@ Apart from strict SI system prefixes, that refer to powers of 10, the crate also
 
 ## References
 
-1. Bureau International des Poids et Mesures. (2025). *Le Système international d'unités/The International System of Units*. 9th edition. [https://doi.org/10.59161/AUEZ1291](https://doi.org/10.59161/AUEZ1291)
+1. Bureau International des Poids et Mesures. (2025). *Le Système international d’unités/The International System of Units*. 9th edition. [https://doi.org/10.59161/AUEZ1291](https://doi.org/10.59161/AUEZ1291)

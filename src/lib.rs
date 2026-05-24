@@ -125,7 +125,7 @@
 //! 
 //! ## References
 //!
-//! 1. Bureau International des Poids et Mesures. (2025). *Le Système international d'unités/The International System of Units*. 9th edition. [https://doi.org/10.59161/AUEZ1291](https://doi.org/10.59161/AUEZ1291)
+//! 1. Bureau International des Poids et Mesures. (2025). *Le Système international d’unités/The International System of Units*. 9th edition. [https://doi.org/10.59161/AUEZ1291](https://doi.org/10.59161/AUEZ1291)
 
 pub enum Prefix {
     /// Name: deca, symbol: da, factor: 10<sup>1</sup>
