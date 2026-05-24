@@ -152,6 +152,10 @@ impl Prefix {
             Prefix::Quebi => "Qi",
         }
     }
+
+    pub fn conversion_constant(from: Self, to: Self) -> f64 {
+        from.factor() / to.factor()
+    }
 }
 
 #[cfg(test)]
