@@ -1,0 +1,12 @@
+[package]
+name = "si-prefixes"
+version = "0.1.0"
+edition = "2024"
+description = "A crate for converting between units using different SI prefixes."
+readme = "README.md"
+repository = "https://github.com/JonasEngstrom/si-prefixes"
+license = "MIT"
+keywords = ["prefixes", "units", "conversion", "math", "physics"]
+categories = ["development-tools", "mathematics", "parsing", "science", "value-formatting"]
+
+[dependencies]
