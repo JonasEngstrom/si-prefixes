@@ -19,7 +19,15 @@ use si_prefixes::Prefix;
 
 let prefix_name = Prefix::Micro.name();
 
-assert_eq!(prefix_name, "micro");
+assert_eq!(prefix_name.unwrap(), "micro");
+```
+
+```rust
+use si_prefixes::Prefix;
+
+let prefix_name = Prefix::None.name();
+
+assert_eq!(prefix_name, None);
 ```
 
 ### Getting a Prefix Symbol
@@ -29,7 +37,15 @@ use si_prefixes::Prefix;
 
 let prefix_symbol = Prefix::Mega.symbol();
 
-assert_eq!(prefix_symbol, "M");
+assert_eq!(prefix_symbol.unwrap(), "M");
+```
+
+```rust
+use si_prefixes::Prefix;
+
+let prefix_symbol = Prefix::None.symbol();
+
+assert_eq!(prefix_symbol, None);
 ```
 
 ### Getting a Prefix Factor
