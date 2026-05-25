@@ -4,7 +4,7 @@
 //! 
 //! ## Usage
 //! 
-//! The crate includes the factors, names, and symbols listed above for use in calculations and output formatting. It also includes a method to calculate conversion constants that can be multiplied with a value in order to change its prefix.
+//! The crate includes the factors, names, and symbols [listed below](#included-prefixes) for use in calculations and output formatting. It also includes a method to calculate conversion constants that can be multiplied with a value in order to change its prefix.
 //! 
 //! Usage revolves around the `Prefix` enum. For example the prefix kilo is represented as `Prefix::Kilo`.
 //! 
