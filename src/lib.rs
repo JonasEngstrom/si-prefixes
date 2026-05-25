@@ -17,7 +17,15 @@
 //! 
 //! let prefix_name = Prefix::Micro.name();
 //! 
-//! assert_eq!(prefix_name, "micro");
+//! assert_eq!(prefix_name.unwrap(), "micro");
+//! ```
+//! 
+//! ```
+//! use si_prefixes::Prefix;
+//! 
+//! let prefix_name = Prefix::None.name();
+//! 
+//! assert_eq!(prefix_name, None);
 //! ```
 //! 
 //! ### Getting a Prefix Symbol
@@ -27,7 +35,15 @@
 //! 
 //! let prefix_symbol = Prefix::Mega.symbol();
 //! 
-//! assert_eq!(prefix_symbol, "M");
+//! assert_eq!(prefix_symbol.unwrap(), "M");
+//! ```
+//! 
+//! ```
+//! use si_prefixes::Prefix;
+//! 
+//! let prefix_symbol = Prefix::None.symbol();
+//! 
+//! assert_eq!(prefix_symbol, None);
 //! ```
 //! 
 //! ### Getting a Prefix Factor
@@ -196,7 +212,7 @@ pub enum Prefix {
     Robi,
     /// Name: quebi, symbol: Qi, factor: 2<sup>100</sup>
     Quebi,
-    /// Name: no name, symbol: no symbol, factor: 1
+    /// Name: `None`, symbol: `None`, factor: 1
     None,
 }
 
@@ -250,101 +266,117 @@ impl Prefix {
         }
     }
 
-    /// Returns the name of a prefix.
+    /// Returns an `Option<&'static str>` with the name of a prefix or `None`, if there is no prefix.
     /// 
     /// ```
     /// use si_prefixes::Prefix;
     /// 
     /// let unit_name = Prefix::Kilo.name();
     /// 
-    /// assert_eq!(unit_name, "kilo");
+    /// assert_eq!(unit_name.unwrap(), "kilo");
     /// ```
-    pub fn name(&self) -> &'static str {
+    ///
+    /// ```
+    /// use si_prefixes::Prefix;
+    /// 
+    /// let unit_name = Prefix::None.name();
+    /// 
+    /// assert_eq!(unit_name, None);
+    /// ```
+    pub fn name(&self) -> Option<&'static str> {
         match self {
-            Prefix::Deca => "deca",
-            Prefix::Hecto => "hecto",
-            Prefix::Kilo => "kilo",
-            Prefix::Mega => "mega",
-            Prefix::Giga => "giga",
-            Prefix::Tera => "tera",
-            Prefix::Peta => "peta",
-            Prefix::Exa => "exa",
-            Prefix::Zetta => "zetta",
-            Prefix::Yotta => "yotta",
-            Prefix::Ronna => "ronna",
-            Prefix::Quetta => "quetta",
-            Prefix::Deci => "deci",
-            Prefix::Centi => "centi",
-            Prefix::Milli => "milli",
-            Prefix::Micro => "micro",
-            Prefix::Nano => "nano",
-            Prefix::Pico => "pico",
-            Prefix::Femto => "femto",
-            Prefix::Atto => "atto",
-            Prefix::Zepto => "zepto",
-            Prefix::Yocto => "yocto",
-            Prefix::Ronto => "ronto",
-            Prefix::Quecto => "quecto",
-            Prefix::Kibi => "kibi",
-            Prefix::Mebi => "mebi",
-            Prefix::Gibi => "gibi",
-            Prefix::Tebi => "tebi",
-            Prefix::Pebi => "pebi",
-            Prefix::Exbi => "exbi",
-            Prefix::Zebi => "zebi",
-            Prefix::Yobi => "yobi",
-            Prefix::Robi => "robi",
-            Prefix::Quebi => "quebi",
-            Prefix::None => "",
+            Prefix::Deca => Some("deca"),
+            Prefix::Hecto => Some("hecto"),
+            Prefix::Kilo => Some("kilo"),
+            Prefix::Mega => Some("mega"),
+            Prefix::Giga => Some("giga"),
+            Prefix::Tera => Some("tera"),
+            Prefix::Peta => Some("peta"),
+            Prefix::Exa => Some("exa"),
+            Prefix::Zetta => Some("zetta"),
+            Prefix::Yotta => Some("yotta"),
+            Prefix::Ronna => Some("ronna"),
+            Prefix::Quetta => Some("quetta"),
+            Prefix::Deci => Some("deci"),
+            Prefix::Centi => Some("centi"),
+            Prefix::Milli => Some("milli"),
+            Prefix::Micro => Some("micro"),
+            Prefix::Nano => Some("nano"),
+            Prefix::Pico => Some("pico"),
+            Prefix::Femto => Some("femto"),
+            Prefix::Atto => Some("atto"),
+            Prefix::Zepto => Some("zepto"),
+            Prefix::Yocto => Some("yocto"),
+            Prefix::Ronto => Some("ronto"),
+            Prefix::Quecto => Some("quecto"),
+            Prefix::Kibi => Some("kibi"),
+            Prefix::Mebi => Some("mebi"),
+            Prefix::Gibi => Some("gibi"),
+            Prefix::Tebi => Some("tebi"),
+            Prefix::Pebi => Some("pebi"),
+            Prefix::Exbi => Some("exbi"),
+            Prefix::Zebi => Some("zebi"),
+            Prefix::Yobi => Some("yobi"),
+            Prefix::Robi => Some("robi"),
+            Prefix::Quebi => Some("quebi"),
+            Prefix::None => None,
         }
     }
 
-    /// Returns the symbol of a prefix.
+    /// Returns an `Option<&'static str>` with the symbol of a prefix or `None`, if there is no prefix.
     /// 
     /// ```
     /// use si_prefixes::Prefix;
     /// 
     /// let unit_symbol = Prefix::Kibi.symbol();
     /// 
-    /// assert_eq!(unit_symbol, "Ki");
+    /// assert_eq!(unit_symbol.unwrap(), "Ki");
     /// ```
-    pub fn symbol(&self) -> &'static str {
+    ///
+    /// ```
+    /// use si_prefixes::Prefix;
+    /// 
+    /// let unit_symbol = Prefix::None.symbol();
+    /// 
+    /// assert_eq!(unit_symbol, None);
+    /// ```
+    pub fn symbol(&self) -> Option<&'static str> {
         match self {
-            Prefix::Deca => "da",
-            Prefix::Hecto => "h",
-            Prefix::Kilo => "k",
-            Prefix::Mega => "M",
-            Prefix::Giga => "G",
-            Prefix::Tera => "T",
-            Prefix::Peta => "P",
-            Prefix::Exa => "E",
-            Prefix::Zetta => "Z",
-            Prefix::Yotta => "Y",
-            Prefix::Ronna => "R",
-            Prefix::Quetta => "Q",
-            Prefix::Deci => "d",
-            Prefix::Centi => "c",
-            Prefix::Milli => "m",
-            Prefix::Micro => "µ",
-            Prefix::Nano => "n",
-            Prefix::Pico => "p",
-            Prefix::Femto => "f",
-            Prefix::Atto => "a",
-            Prefix::Zepto => "z",
-            Prefix::Yocto => "y",
-            Prefix::Ronto => "r",
-            Prefix::Quecto => "q",
-            Prefix::Kibi => "Ki",
-            Prefix::Mebi => "Mi",
-            Prefix::Gibi => "Gi",
-            Prefix::Tebi => "Ti",
-            Prefix::Pebi => "Pi",
-            Prefix::Exbi => "Ei",
-            Prefix::Zebi => "Zi",
-            Prefix::Yobi => "Yi",
-            Prefix::Robi => "Ri",
-            Prefix::Quebi => "Qi",
-            Prefix::None => "",
+            Prefix::Deca => Some("da"),
+            Prefix::Hecto => Some("h"),
+            Prefix::Kilo => Some("k"),
+            Prefix::Mega => Some("M"),
+            Prefix::Giga => Some("G"),
+            Prefix::Tera => Some("T"),
+            Prefix::Peta => Some("P"),
+            Prefix::Exa => Some("E"),
+            Prefix::Zetta => Some("Z"),
+            Prefix::Yotta => Some("Y"),
+            Prefix::Ronna => Some("R"),
+            Prefix::Quetta => Some("Q"),
+            Prefix::Deci => Some("d"),
+            Prefix::Centi => Some("c"),
+            Prefix::Milli => Some("m"),
+            Prefix::Micro => Some("µ"),
+            Prefix::Nano => Some("n"),
+            Prefix::Pico => Some("p"),
+            Prefix::Femto => Some("f"),
+            Prefix::Atto => Some("a"),
+            Prefix::Zepto => Some("z"),
+            Prefix::Yocto => Some("y"),
+            Prefix::Ronto => Some("r"),
+            Prefix::Quecto => Some("q"),
+            Prefix::Kibi => Some("Ki"),
+            Prefix::Mebi => Some("Mi"),
+            Prefix::Gibi => Some("Gi"),
+            Prefix::Tebi => Some("Ti"),
+            Prefix::Pebi => Some("Pi"),
+            Prefix::Exbi => Some("Ei"),
+            Prefix::Zebi => Some("Zi"),
+            Prefix::Yobi => Some("Yi"),
+            Prefix::Robi => Some("Ri"),
+            Prefix::Quebi => Some("Qi"),
+            Prefix::None => None,
         }
     }
 
@@ -434,86 +466,86 @@ mod tests {
 
     #[test]
     fn names_are_correct() {
-        assert_eq!(Prefix::Deca.name(), "deca");
-        assert_eq!(Prefix::Hecto.name(), "hecto");
-        assert_eq!(Prefix::Kilo.name(), "kilo");
-        assert_eq!(Prefix::Mega.name(), "mega");
-        assert_eq!(Prefix::Giga.name(), "giga");
-        assert_eq!(Prefix::Tera.name(), "tera");
-        assert_eq!(Prefix::Peta.name(), "peta");
-        assert_eq!(Prefix::Exa.name(), "exa");
-        assert_eq!(Prefix::Zetta.name(), "zetta");
-        assert_eq!(Prefix::Yotta.name(), "yotta");
-        assert_eq!(Prefix::Ronna.name(), "ronna");
-        assert_eq!(Prefix::Quetta.name(), "quetta");
+        assert_eq!(Prefix::Deca.name().unwrap(), "deca");
+        assert_eq!(Prefix::Hecto.name().unwrap(), "hecto");
+        assert_eq!(Prefix::Kilo.name().unwrap(), "kilo");
+        assert_eq!(Prefix::Mega.name().unwrap(), "mega");
+        assert_eq!(Prefix::Giga.name().unwrap(), "giga");
+        assert_eq!(Prefix::Tera.name().unwrap(), "tera");
+        assert_eq!(Prefix::Peta.name().unwrap(), "peta");
+        assert_eq!(Prefix::Exa.name().unwrap(), "exa");
+        assert_eq!(Prefix::Zetta.name().unwrap(), "zetta");
+        assert_eq!(Prefix::Yotta.name().unwrap(), "yotta");
+        assert_eq!(Prefix::Ronna.name().unwrap(), "ronna");
+        assert_eq!(Prefix::Quetta.name().unwrap(), "quetta");
 
-        assert_eq!(Prefix::Deci.name(), "deci");
-        assert_eq!(Prefix::Centi.name(), "centi");
-        assert_eq!(Prefix::Milli.name(), "milli");
-        assert_eq!(Prefix::Micro.name(), "micro");
-        assert_eq!(Prefix::Nano.name(), "nano");
-        assert_eq!(Prefix::Pico.name(), "pico");
-        assert_eq!(Prefix::Femto.name(), "femto");
-        assert_eq!(Prefix::Atto.name(), "atto");
-        assert_eq!(Prefix::Zepto.name(), "zepto");
-        assert_eq!(Prefix::Yocto.name(), "yocto");
-        assert_eq!(Prefix::Ronto.name(), "ronto");
-        assert_eq!(Prefix::Quecto.name(), "quecto");
+        assert_eq!(Prefix::Deci.name().unwrap(), "deci");
+        assert_eq!(Prefix::Centi.name().unwrap(), "centi");
+        assert_eq!(Prefix::Milli.name().unwrap(), "milli");
+        assert_eq!(Prefix::Micro.name().unwrap(), "micro");
+        assert_eq!(Prefix::Nano.name().unwrap(), "nano");
+        assert_eq!(Prefix::Pico.name().unwrap(), "pico");
+        assert_eq!(Prefix::Femto.name().unwrap(), "femto");
+        assert_eq!(Prefix::Atto.name().unwrap(), "atto");
+        assert_eq!(Prefix::Zepto.name().unwrap(), "zepto");
+        assert_eq!(Prefix::Yocto.name().unwrap(), "yocto");
+        assert_eq!(Prefix::Ronto.name().unwrap(), "ronto");
+        assert_eq!(Prefix::Quecto.name().unwrap(), "quecto");
 
-        assert_eq!(Prefix::Kibi.name(), "kibi");
-        assert_eq!(Prefix::Mebi.name(), "mebi");
-        assert_eq!(Prefix::Gibi.name(), "gibi");
-        assert_eq!(Prefix::Tebi.name(), "tebi");
-        assert_eq!(Prefix::Pebi.name(), "pebi");
-        assert_eq!(Prefix::Exbi.name(), "exbi");
-        assert_eq!(Prefix::Zebi.name(), "zebi");
-        assert_eq!(Prefix::Yobi.name(), "yobi");
-        assert_eq!(Prefix::Robi.name(), "robi");
-        assert_eq!(Prefix::Quebi.name(), "quebi");
+        assert_eq!(Prefix::Kibi.name().unwrap(), "kibi");
+        assert_eq!(Prefix::Mebi.name().unwrap(), "mebi");
+        assert_eq!(Prefix::Gibi.name().unwrap(), "gibi");
+        assert_eq!(Prefix::Tebi.name().unwrap(), "tebi");
+        assert_eq!(Prefix::Pebi.name().unwrap(), "pebi");
+        assert_eq!(Prefix::Exbi.name().unwrap(), "exbi");
+        assert_eq!(Prefix::Zebi.name().unwrap(), "zebi");
+        assert_eq!(Prefix::Yobi.name().unwrap(), "yobi");
+        assert_eq!(Prefix::Robi.name().unwrap(), "robi");
+        assert_eq!(Prefix::Quebi.name().unwrap(), "quebi");
 
-        assert_eq!(Prefix::None.name(), "");
+        assert_eq!(Prefix::None.name(), None);
     }
 
     #[test]
     fn symbols_are_correct() {
-        assert_eq!(Prefix::Deca.symbol(), "da");
-        assert_eq!(Prefix::Hecto.symbol(), "h");
-        assert_eq!(Prefix::Kilo.symbol(), "k");
-        assert_eq!(Prefix::Mega.symbol(), "M");
-        assert_eq!(Prefix::Giga.symbol(), "G");
-        assert_eq!(Prefix::Tera.symbol(), "T");
-        assert_eq!(Prefix::Peta.symbol(), "P");
-        assert_eq!(Prefix::Exa.symbol(), "E");
-        assert_eq!(Prefix::Zetta.symbol(), "Z");
-        assert_eq!(Prefix::Yotta.symbol(), "Y");
-        assert_eq!(Prefix::Ronna.symbol(), "R");
-        assert_eq!(Prefix::Quetta.symbol(), "Q");
+        assert_eq!(Prefix::Deca.symbol().unwrap(), "da");
+        assert_eq!(Prefix::Hecto.symbol().unwrap(), "h");
+        assert_eq!(Prefix::Kilo.symbol().unwrap(), "k");
+        assert_eq!(Prefix::Mega.symbol().unwrap(), "M");
+        assert_eq!(Prefix::Giga.symbol().unwrap(), "G");
+        assert_eq!(Prefix::Tera.symbol().unwrap(), "T");
+        assert_eq!(Prefix::Peta.symbol().unwrap(), "P");
+        assert_eq!(Prefix::Exa.symbol().unwrap(), "E");
+        assert_eq!(Prefix::Zetta.symbol().unwrap(), "Z");
+        assert_eq!(Prefix::Yotta.symbol().unwrap(), "Y");
+        assert_eq!(Prefix::Ronna.symbol().unwrap(), "R");
+        assert_eq!(Prefix::Quetta.symbol().unwrap(), "Q");
 
-        assert_eq!(Prefix::Deci.symbol(), "d");
-        assert_eq!(Prefix::Centi.symbol(), "c");
-        assert_eq!(Prefix::Milli.symbol(), "m");
-        assert_eq!(Prefix::Micro.symbol(), "µ");
-        assert_eq!(Prefix::Nano.symbol(), "n");
-        assert_eq!(Prefix::Pico.symbol(), "p");
-        assert_eq!(Prefix::Femto.symbol(), "f");
-        assert_eq!(Prefix::Atto.symbol(), "a");
-        assert_eq!(Prefix::Zepto.symbol(), "z");
-        assert_eq!(Prefix::Yocto.symbol(), "y");
-        assert_eq!(Prefix::Ronto.symbol(), "r");
-        assert_eq!(Prefix::Quecto.symbol(), "q");
+        assert_eq!(Prefix::Deci.symbol().unwrap(), "d");
+        assert_eq!(Prefix::Centi.symbol().unwrap(), "c");
+        assert_eq!(Prefix::Milli.symbol().unwrap(), "m");
+        assert_eq!(Prefix::Micro.symbol().unwrap(), "µ");
+        assert_eq!(Prefix::Nano.symbol().unwrap(), "n");
+        assert_eq!(Prefix::Pico.symbol().unwrap(), "p");
+        assert_eq!(Prefix::Femto.symbol().unwrap(), "f");
+        assert_eq!(Prefix::Atto.symbol().unwrap(), "a");
+        assert_eq!(Prefix::Zepto.symbol().unwrap(), "z");
+        assert_eq!(Prefix::Yocto.symbol().unwrap(), "y");
+        assert_eq!(Prefix::Ronto.symbol().unwrap(), "r");
+        assert_eq!(Prefix::Quecto.symbol().unwrap(), "q");
 
-        assert_eq!(Prefix::Kibi.symbol(), "Ki");
-        assert_eq!(Prefix::Mebi.symbol(), "Mi");
-        assert_eq!(Prefix::Gibi.symbol(), "Gi");
-        assert_eq!(Prefix::Tebi.symbol(), "Ti");
-        assert_eq!(Prefix::Pebi.symbol(), "Pi");
-        assert_eq!(Prefix::Exbi.symbol(), "Ei");
-        assert_eq!(Prefix::Zebi.symbol(), "Zi");
-        assert_eq!(Prefix::Yobi.symbol(), "Yi");
-        assert_eq!(Prefix::Robi.symbol(), "Ri");
-        assert_eq!(Prefix::Quebi.symbol(), "Qi");
+        assert_eq!(Prefix::Kibi.symbol().unwrap(), "Ki");
+        assert_eq!(Prefix::Mebi.symbol().unwrap(), "Mi");
+        assert_eq!(Prefix::Gibi.symbol().unwrap(), "Gi");
+        assert_eq!(Prefix::Tebi.symbol().unwrap(), "Ti");
+        assert_eq!(Prefix::Pebi.symbol().unwrap(), "Pi");
+        assert_eq!(Prefix::Exbi.symbol().unwrap(), "Ei");
+        assert_eq!(Prefix::Zebi.symbol().unwrap(), "Zi");
+        assert_eq!(Prefix::Yobi.symbol().unwrap(), "Yi");
+        assert_eq!(Prefix::Robi.symbol().unwrap(), "Ri");
+        assert_eq!(Prefix::Quebi.symbol().unwrap(), "Qi");
         
-        assert_eq!(Prefix::None.symbol(), "")
+        assert_eq!(Prefix::None.symbol(), None)
     }
 
     #[test]
