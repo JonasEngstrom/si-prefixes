@@ -1,4 +1,6 @@
-<!-- [![Rust](https://github.com/JonasEngstrom/si-prefixes/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/JonasEngstrom/si-prefixes/actions/workflows/rust.yml) -->
+[![Build and Test](https://github.com/JonasEngstrom/si-prefixes/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/JonasEngstrom/si-prefixes/actions/workflows/rust.yml)
+[![codecov](https://codecov.io/gh/JonasEngstrom/si-prefixes/branch/main/graph/badge.svg?token=EASZ5S5F4Q)](https://codecov.io/gh/JonasEngstrom/si-prefixes)
+![Crates.io Version](https://img.shields.io/crates/v/si-prefixes?color=e3773f)
 
 # SI Prefixes
 
