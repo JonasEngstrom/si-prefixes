@@ -283,7 +283,7 @@ impl Prefix {
     /// 
     /// assert_eq!(unit_name, None);
     /// ```
-    pub fn name(&self) -> Option<&'static str> {
+    pub fn name(&self) -> Option<&str> {
         match self {
             Prefix::Deca => Some("deca"),
             Prefix::Hecto => Some("hecto"),
@@ -340,7 +340,7 @@ impl Prefix {
     /// 
     /// assert_eq!(unit_symbol, None);
     /// ```
-    pub fn symbol(&self) -> Option<&'static str> {
+    pub fn symbol(&self) -> Option<&str> {
         match self {
             Prefix::Deca => Some("da"),
             Prefix::Hecto => Some("h"),
