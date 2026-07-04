@@ -1,6 +1,6 @@
 [package]
 name = "si-prefixes"
-version = "1.0.2"
+version = "2.0.0"
 edition = "2024"
 description = "A crate for converting between units using different SI prefixes."
 readme = "README.md"
