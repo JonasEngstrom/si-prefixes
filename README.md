@@ -68,7 +68,7 @@ assert_eq!(prefix_factor, 1_000f64);
 use si_prefixes::Prefix;
 
 let centimeters = 50f64;
-let decimeters = centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::Deci);
+let decimeters = centimeters * Prefix::conversion_constant(&Prefix::Centi, &Prefix::Deci);
 
 assert_eq!(decimeters, 5f64);
 ```
@@ -79,7 +79,7 @@ assert_eq!(decimeters, 5f64);
 use si_prefixes::Prefix;
 
 let meters = 0.5f64;
-let decimeters = meters * Prefix::conversion_constant(Prefix::None, Prefix::Deci);
+let decimeters = meters * Prefix::conversion_constant(&Prefix::None, &Prefix::Deci);
 
 assert_eq!(decimeters, 5f64);
 ```
@@ -90,7 +90,7 @@ assert_eq!(decimeters, 5f64);
 use si_prefixes::Prefix;
 
 let decimeters = 5f64;
-let meters = decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::None);
+let meters = decimeters * Prefix::conversion_constant(&Prefix::Deci, &Prefix::None);
 
 assert_eq!(meters, 0.5f64);
 ```
@@ -145,4 +145,4 @@ Apart from strict SI system prefixes, that refer to powers of 10, the crate also
 
 ## References
 
-1. Bureau International des Poids et Mesures. (2025). *Le Système international d’unités/The International System of Units*. 9th edition. [https://doi.org/10.59161/AUEZ1291](https://doi.org/10.59161/AUEZ1291)
+1. [Le Système international d’unités, 9e édition. Sèvres (France): Bureau International des Poids et Mesures; 2025 Aug. doi:10.59161/AUEZ1291](https://www.doi.org/10.59161/AUEZ1291)
