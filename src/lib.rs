@@ -64,7 +64,7 @@
 //! use si_prefixes::Prefix;
 //! 
 //! let centimeters = 50f64;
-//! let decimeters = centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::Deci);
+//! let decimeters = centimeters * Prefix::conversion_constant(&Prefix::Centi, &Prefix::Deci);
 //! 
 //! assert_eq!(decimeters, 5f64);
 //! ```
@@ -75,7 +75,7 @@
 //! use si_prefixes::Prefix;
 //! 
 //! let meters = 0.5f64;
-//! let decimeters = meters * Prefix::conversion_constant(Prefix::None, Prefix::Deci);
+//! let decimeters = meters * Prefix::conversion_constant(&Prefix::None, &Prefix::Deci);
 //! 
 //! assert_eq!(decimeters, 5f64);
 //! ```
@@ -86,7 +86,7 @@
 //! use si_prefixes::Prefix;
 //! 
 //! let decimeters = 5f64;
-//! let meters = decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::None);
+//! let meters = decimeters * Prefix::conversion_constant(&Prefix::Deci, &Prefix::None);
 //! 
 //! assert_eq!(meters, 0.5f64);
 //! ```
@@ -387,7 +387,7 @@ impl Prefix {
     /// use si_prefixes::Prefix;
     /// 
     /// let centimeters = 50f64;
-    /// let decimeters = centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::Deci);
+    /// let decimeters = centimeters * Prefix::conversion_constant(&Prefix::Centi, &Prefix::Deci);
     /// 
     /// assert_eq!(decimeters, 5f64);
     /// ```
@@ -398,7 +398,7 @@ impl Prefix {
     /// use si_prefixes::Prefix;
     /// 
     /// let meters = 0.5f64;
-    /// let decimeters = meters * Prefix::conversion_constant(Prefix::None, Prefix::Deci);
+    /// let decimeters = meters * Prefix::conversion_constant(&Prefix::None, &Prefix::Deci);
     /// 
     /// assert_eq!(decimeters, 5f64);
     /// ```
@@ -409,11 +409,11 @@ impl Prefix {
     /// use si_prefixes::Prefix;
     /// 
     /// let decimeters = 5f64;
-    /// let meters = decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::None);
+    /// let meters = decimeters * Prefix::conversion_constant(&Prefix::Deci, &Prefix::None);
     /// 
     /// assert_eq!(meters, 0.5f64);
     /// ```
-    pub fn conversion_constant(from: Self, to: Self) -> f64 {
+    pub fn conversion_constant(from: &Self, to: &Self) -> f64 {
         from.factor() / to.factor()
     }
 }
@@ -554,16 +554,16 @@ mod tests {
         let decimeters = 5f64;
         let centimeters = 50f64;
 
-        assert_eq!(meters * Prefix::conversion_constant(Prefix::None, Prefix::None), meters);
-        assert_eq!(meters * Prefix::conversion_constant(Prefix::None, Prefix::Deci), decimeters);
-        assert_eq!(meters * Prefix::conversion_constant(Prefix::None, Prefix::Centi), centimeters);
+        assert_eq!(meters * Prefix::conversion_constant(&Prefix::None, &Prefix::None), meters);
+        assert_eq!(meters * Prefix::conversion_constant(&Prefix::None, &Prefix::Deci), decimeters);
+        assert_eq!(meters * Prefix::conversion_constant(&Prefix::None, &Prefix::Centi), centimeters);
 
-        assert_eq!(decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::None), meters);
-        assert_eq!(decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::Deci), decimeters);
-        assert_eq!(decimeters * Prefix::conversion_constant(Prefix::Deci, Prefix::Centi), centimeters);
+        assert_eq!(decimeters * Prefix::conversion_constant(&Prefix::Deci, &Prefix::None), meters);
+        assert_eq!(decimeters * Prefix::conversion_constant(&Prefix::Deci, &Prefix::Deci), decimeters);
+        assert_eq!(decimeters * Prefix::conversion_constant(&Prefix::Deci, &Prefix::Centi), centimeters);
 
-        assert_eq!(centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::Deci), decimeters);
-        assert_eq!(centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::None), meters);
-        assert_eq!(centimeters * Prefix::conversion_constant(Prefix::Centi, Prefix::Centi), centimeters);
+        assert_eq!(centimeters * Prefix::conversion_constant(&Prefix::Centi, &Prefix::Deci), decimeters);
+        assert_eq!(centimeters * Prefix::conversion_constant(&Prefix::Centi, &Prefix::None), meters);
+        assert_eq!(centimeters * Prefix::conversion_constant(&Prefix::Centi, &Prefix::Centi), centimeters);
     }
 }
